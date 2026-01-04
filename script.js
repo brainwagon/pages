@@ -2,6 +2,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const username = 'brainwagon';
     const apiUrl = `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`;
     const listElement = document.getElementById('repo-list');
+    const introElement = document.getElementById('intro');
+
+    // Fetch and render intro.md
+    fetch('intro.md')
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw new Error('Could not load intro.md');
+        })
+        .then(markdown => {
+            introElement.innerHTML = marked.parse(markdown);
+        })
+        .catch(error => {
+            console.log('Intro load failed, keeping default text:', error);
+        });
 
     fetch(apiUrl)
         .then(response => {

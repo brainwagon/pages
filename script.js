@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const introElement = document.getElementById('intro');
 
     // Fetch and render intro.md
-    fetch('intro.md')
+    fetch(`intro.md?v=${Date.now()}`)
         .then(response => {
             if (response.ok) {
                 return response.text();
